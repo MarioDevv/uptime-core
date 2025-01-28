@@ -26,5 +26,10 @@ class MonitorState
         return $this->value;
     }
 
+    public function equals(MonitorState $other): bool
+    {
+        return $this->value === $other->value;
+    }
+
 
 }

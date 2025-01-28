@@ -22,4 +22,9 @@ class MonitorTimeOut
         return $this->value;
     }
 
+    public function equals(MonitorTimeOut $other): bool
+    {
+        return $this->value === $other->value;
+    }
+
 }

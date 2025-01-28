@@ -26,4 +26,9 @@ class MonitorInterval
         return $this->value;
     }
 
+    public function equals(MonitorInterval $other): bool
+    {
+        return $this->value() === $other->value;
+    }
+
 }

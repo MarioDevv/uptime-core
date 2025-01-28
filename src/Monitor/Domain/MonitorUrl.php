@@ -22,5 +22,10 @@ class MonitorUrl
         return $this->value;
     }
 
+    public function equals(MonitorUrl $other): bool
+    {
+        return $this->value === $other->value;
+    }
+
 
 }

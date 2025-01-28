@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Mario\Uptime\Monitor\Application\Create;
 
@@ -19,9 +20,9 @@ class CreateMonitor
     {
 
         $monitor = Monitor::create(
+            $this->repository->nextIdentity(),
             $request->url(),
             $request->interval(),
-            $request->state(),
             $request->timeOut()
         );
 
