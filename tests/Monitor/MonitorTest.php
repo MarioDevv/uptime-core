@@ -1,7 +1,12 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Domain;
+namespace Mario\Uptime\Tests\Monitor\Domain;
 
+use Mario\Uptime\Monitor\Domain\Monitor;
+use Mario\Uptime\Monitor\Domain\MonitorInterval;
+use Mario\Uptime\Monitor\Domain\MonitorState;
+use Mario\Uptime\Monitor\Domain\MonitorTimeOut;
+use Mario\Uptime\Monitor\Domain\MonitorUrl;
 use PHPUnit\Framework\TestCase;
 
 class MonitorTest extends TestCase

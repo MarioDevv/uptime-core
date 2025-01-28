@@ -67,6 +67,17 @@ class Monitor
 
     }
 
+    public static function create(int $id, string $url, int $interval, int $timeOut): self
+    {
+        return new self(
+            $id,
+            new MonitorUrl($url),
+            new MonitorInterval($interval),
+            new MonitorState(MonitorState::UP),
+            new MonitorTimeOut($timeOut)
+        );
+    }
+
     private function checkIfHttpCodeIsCorrect(int $httpCode): bool
     {
         return $httpCode >= 200 && $httpCode < 400;
