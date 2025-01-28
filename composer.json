@@ -1,5 +1,6 @@
 {
     "name": "mario/uptime",
+    "description": "A simple uptime monitor",
     "license": "MIT",
     "autoload": {
         "psr-4": {
