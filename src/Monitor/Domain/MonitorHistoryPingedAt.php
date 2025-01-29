@@ -3,35 +3,21 @@
 namespace MarioDevv\Uptime\Monitor\Domain;
 
 use DateTime;
+use DateTimeImmutable;
 
 class MonitorHistoryPingedAt
 {
 
-    private string $value;
+    private DateTimeImmutable $value;
 
-    public function __construct(string $pingedAt)
+    public function __construct(DateTimeImmutable $pingedAt)
     {
-        $this->ensureIsValidDate($pingedAt);
-
         $this->value = $pingedAt;
     }
 
-    public function value(): string
+    public function value(): DateTimeImmutable
     {
         return $this->value;
-    }
-
-    private function ensureIsValidDate(?string $date): void
-    {
-        if ($date === null) {
-            return;
-        }
-
-        $date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-
-        if ($date === false) {
-            throw new \InvalidArgumentException('Invalid date format');
-        }
     }
 
 }

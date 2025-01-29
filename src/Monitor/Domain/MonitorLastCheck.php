@@ -10,21 +10,19 @@ use InvalidArgumentException;
 class MonitorLastCheck
 {
 
-    private ?string $value;
+    private ?DateTimeImmutable $value;
 
-    public function __construct(?string $date)
+    public function __construct(?DateTimeImmutable $date)
     {
-        $this->ensureIsValidDate($date);
-
         $this->value = $date;
     }
 
     public static function now(): MonitorLastCheck
     {
-        return new self(date('Y-m-d H:i:s'));
+        return new self(new DateTimeImmutable());
     }
 
-    public function value(): ?string
+    public function value(): ?DateTimeImmutable
     {
         return $this->value;
     }
@@ -35,24 +33,10 @@ class MonitorLastCheck
             return true;
         }
 
-        $lastCheckTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $this->value);
-        $nextCheckTime = $lastCheckTime->modify("+{$interval->value()} seconds");
-        $currentTime   = new DateTimeImmutable();
+        $nextCheckTime = $this->value->modify("+{$interval->value()} seconds");
+        $currentTime = new DateTimeImmutable();
 
         return $currentTime >= $nextCheckTime;
-    }
-
-    private function ensureIsValidDate(?string $date): void
-    {
-        if ($date === null) {
-            return;
-        }
-
-        $date = DateTime::createFromFormat('Y-m-d H:i:s', $date);
-
-        if ($date === false) {
-            throw new InvalidArgumentException('Invalid date format');
-        }
     }
 
 }
