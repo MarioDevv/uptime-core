@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+
 namespace MarioDevv\Uptime\Monitor\Domain;
 
 class MonitorHistory
@@ -10,13 +11,13 @@ class MonitorHistory
     private int $monitorId;
     private MonitorHistoryPingedAt $pingedAt;
     private MonitorHistoryState $state;
-    private MonitorHistoryResponseTime $responseTime;
+    private float $responseTime;
 
     public function __construct(
-        int                        $monitorId,
-        MonitorHistoryPingedAt     $pingedAt,
-        MonitorHistoryState        $state,
-        MonitorHistoryResponseTime $responseTime
+        int                    $monitorId,
+        MonitorHistoryPingedAt $pingedAt,
+        MonitorHistoryState    $state,
+        float                  $responseTime
     )
     {
         $this->monitorId    = $monitorId;
@@ -40,13 +41,12 @@ class MonitorHistory
         return $this->state;
     }
 
-    public function responseTime(): MonitorHistoryResponseTime
+    public function responseTime(): float
     {
         return $this->responseTime;
     }
 
     public static function create(
-        int    $id,
         int    $monitorId,
         string $pingedAt,
         int    $state,
@@ -57,7 +57,7 @@ class MonitorHistory
             $monitorId,
             new MonitorHistoryPingedAt($pingedAt),
             new MonitorHistoryState($state),
-            new MonitorHistoryResponseTime($responseTime)
+            $responseTime
         );
     }
 
@@ -67,7 +67,7 @@ class MonitorHistory
             $monitor->id(),
             new MonitorHistoryPingedAt($monitor->lastCheck()->value()),
             new MonitorHistoryState($monitor->state()->value()),
-            new MonitorHistoryResponseTime($responseTime)
+            $responseTime
         );
     }
 
