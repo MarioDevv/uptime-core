@@ -1,20 +1,19 @@
 <?php
-declare(strict_types=1);
 
 namespace Mario\Uptime\Monitor\Domain;
-class MonitorState
+
+class MonitorHistoryState
 {
 
-    const int UP      = 1;
-    const int DOWN    = 2;
-    const int STOPPED = 3;
+    const int UP = 1;
+    const int DOWN = 2;
 
 
     private int $value;
 
     public function __construct(int $state)
     {
-        if (!in_array($state, [self::UP, self::DOWN, self::STOPPED])) {
+        if (!in_array($state, [self::UP, self::DOWN])) {
             throw new \InvalidArgumentException('Invalid state');
         }
 
@@ -26,10 +25,9 @@ class MonitorState
         return $this->value;
     }
 
-    public function equals(MonitorState $other): bool
+    public function equals(MonitorHistoryState $other): bool
     {
         return $this->value === $other->value;
     }
-
 
 }

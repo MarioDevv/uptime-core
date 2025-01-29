@@ -1,16 +1,20 @@
 <?php
 
 namespace Mario\Uptime\Monitor\Application\Ping;
+
+use Mario\Uptime\Monitor\Domain\MonitorPingService;
 use Mario\Uptime\Monitor\Domain\MonitorRepository;
 
 class Ping
 {
 
-    private MonitorRepository $repository;
+    private MonitorRepository  $repository;
+    private MonitorPingService $pingService;
 
-    public function __construct(MonitorRepository $repository)
+    public function __construct(MonitorRepository $repository, MonitorPingService $pingService)
     {
-        $this->repository = $repository;
+        $this->repository  = $repository;
+        $this->pingService = $pingService;
     }
 
 
@@ -26,7 +30,7 @@ class Ping
             throw new \Exception('Monitor not found');
         }
 
-        $monitor->ping();
+        $monitor->ping($this->pingService);
 
         $this->repository->save($monitor);
 

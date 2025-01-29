@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 namespace Mario\Uptime\Monitor\Domain;
 
-use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class Monitor
 {
@@ -15,21 +16,27 @@ class Monitor
     private MonitorTimeOut $timeOut;
     private MonitorLastCheck $lastCheck;
 
+    /**
+     * @var Collection<MonitorHistory>
+     */
+    private Collection $history;
+
     public function __construct(
-        int             $id,
-        MonitorUrl      $url,
-        MonitorInterval $interval,
-        MonitorState    $state,
-        MonitorTimeOut  $timeOut,
-        MonitorLastCheck $lastCheck
+        int              $id,
+        MonitorUrl       $url,
+        MonitorInterval  $interval,
+        MonitorState     $state,
+        MonitorTimeOut   $timeOut,
+        MonitorLastCheck $lastCheck,
     )
     {
-        $this->id       = $id;
-        $this->url      = $url;
-        $this->interval = $interval;
-        $this->state    = $state;
-        $this->timeOut  = $timeOut;
+        $this->id        = $id;
+        $this->url       = $url;
+        $this->interval  = $interval;
+        $this->state     = $state;
+        $this->timeOut   = $timeOut;
         $this->lastCheck = $lastCheck;
+        $this->history   = new ArrayCollection();
     }
 
     public function id(): int
@@ -68,17 +75,35 @@ class Monitor
     }
 
     public function ping(MonitorPingService $pingService): void
+
     {
         if (!$this->shouldCheck() || $this->state->value() === MonitorState::STOPPED) {
             return;
         }
 
-        $newState = $pingService->ping($this->url, $this->timeOut);
+        $pingInfo = $pingService->ping($this->url, $this->timeOut);
 
-        $this->state = $newState;
-
+        $this->state     = new MonitorState($pingInfo->state());
         $this->lastCheck = MonitorLastCheck::now();
 
+        $history = MonitorHistory::fromMonitor($this, $pingInfo->responseTime());
+
+        $this->addHistory($history);
+
+    }
+
+    public function addHistory(MonitorHistory $history): void
+    {
+        if ($this->history->count() >= 20) {
+            $this->history->remove(0);
+        }
+
+        $this->history->add($history);
+    }
+
+    public function history(): array
+    {
+        return $this->history->toArray();
     }
 
     public static function create(int $id, string $url, int $interval, int $timeOut): self
@@ -87,7 +112,7 @@ class Monitor
             $id,
             new MonitorUrl($url),
             new MonitorInterval($interval),
-            new MonitorState(MonitorState::STOPPED),
+            new MonitorState(MonitorState::UP),
             new MonitorTimeOut($timeOut),
             new MonitorLastCheck(null)
         );

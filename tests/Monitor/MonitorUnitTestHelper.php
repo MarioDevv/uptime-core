@@ -38,11 +38,18 @@ class MonitorUnitTestHelper extends UnitTestCase
             ->andReturn($monitor);
     }
 
-    protected function delete(int $id): void
+    protected function all(array $monitors): void
+    {
+        $this->repository()
+            ->shouldReceive('all')
+            ->andReturn($monitors);
+    }
+
+    protected function delete(Monitor $monitor): void
     {
         $this->repository()
             ->shouldReceive('delete')
-            ->with($this->equalTo($id))
+            ->with($this->equalTo($monitor))
             ->once();
     }
 

@@ -3,6 +3,7 @@
 namespace Mario\Uptime\Tests\Monitor\Domain;
 
 use Mario\Uptime\Monitor\Domain\Monitor;
+use Mario\Uptime\Monitor\Domain\MonitorHistory;
 use Mario\Uptime\Monitor\Domain\MonitorState;
 
 use PHPUnit\Framework\TestCase;
@@ -23,21 +24,8 @@ class MonitorTest extends TestCase
         $this->assertEquals(1, $monitor->id());
         $this->assertEquals('https://www.google.com', $monitor->url()->value());
         $this->assertEquals(60, $monitor->interval()->value());
-        $this->assertEquals(MonitorState::STOPPED, $monitor->state()->value());
+        $this->assertEquals(MonitorState::UP, $monitor->state()->value());
         $this->assertEquals(10, $monitor->timeOut()->value());
-    }
-
-    /** @test */
-    public function it_should_ping_a_monitor(): void
-    {
-        $monitor = Monitor::create(
-            1,
-            'https://www.google.com',
-            60,
-            10
-        );
-
-        $this->assertEquals(MonitorState::STOPPED, $monitor->state()->value());
     }
 
     /** @test */
@@ -80,17 +68,20 @@ class MonitorTest extends TestCase
     }
 
     /** @test */
-    public function it_should_change_state_if_site_is_down()
+    public function it_should_add_history_of_the_ping()
     {
 
         $monitor = Monitor::create(
             1,
-            'https://www.google.com/404',
-            60,
+            'https://www.google.com',
+            300,
             10
         );
 
-        $this->assertEquals(MonitorState::STOPPED, $monitor->state()->value());
+        $monitor->ping(new PingTestService(1, 0.3));
+
+        $this->assertCount(1, $monitor->history());
+
     }
 
 }

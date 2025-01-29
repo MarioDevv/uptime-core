@@ -21,7 +21,7 @@ class MonitorLastCheck
 
     public static function now(): MonitorLastCheck
     {
-        return new self((new DateTimeImmutable())->format('Y-m-d H:i:s'));
+        return new self(date('Y-m-d H:i:s'));
     }
 
     public function value(): ?string
