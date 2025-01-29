@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Mario\Uptime\Monitor\Domain;
 
 use DateTime;
+use DateTimeImmutable;
 use InvalidArgumentException;
 
 class MonitorLastCheck
@@ -18,9 +19,27 @@ class MonitorLastCheck
         $this->value = $date;
     }
 
+    public static function now(): MonitorLastCheck
+    {
+        return new self((new DateTimeImmutable())->format('Y-m-d H:i:s'));
+    }
+
     public function value(): ?string
     {
         return $this->value;
+    }
+
+    public function isOlderThan(MonitorInterval $interval): bool
+    {
+        if ($this->value === null) {
+            return true;
+        }
+
+        $lastCheckTime = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $this->value);
+        $nextCheckTime = $lastCheckTime->modify("+{$interval->value()} seconds");
+        $currentTime   = new DateTimeImmutable();
+
+        return $currentTime >= $nextCheckTime;
     }
 
     private function ensureIsValidDate(?string $date): void

@@ -26,8 +26,6 @@ class CreateMonitor
             $request->timeOut()
         );
 
-        $monitor->ping();
-
         $this->repository->save($monitor);
     }
 

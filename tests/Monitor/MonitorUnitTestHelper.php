@@ -1,6 +1,6 @@
 <?php
 
-namespace Mario\Uptime\Monitor;
+namespace Mario\Uptime\Tests\Monitor;
 
 use Mario\Uptime\Monitor\Domain\Monitor;
 use Mario\Uptime\Monitor\Domain\MonitorRepository;

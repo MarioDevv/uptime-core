@@ -62,28 +62,23 @@ class Monitor
         return $this->lastCheck;
     }
 
-    public function ping(): void
+    public function shouldCheck(): bool
     {
+        return $this->lastCheck->isOlderThan($this->interval);
+    }
 
-        $ch = curl_init($this->url->value());
+    public function ping(MonitorPingService $pingService): void
+    {
+        if (!$this->shouldCheck() || $this->state->value() === MonitorState::STOPPED) {
+            return;
+        }
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $newState = $pingService->ping($this->url, $this->timeOut);
 
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeOut->value());
+        $this->state = $newState;
 
-        curl_exec($ch);
+        $this->lastCheck = MonitorLastCheck::now();
 
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        curl_close($ch);
-
-        $this->lastCheck = new MonitorLastCheck(
-            (new DateTimeImmutable())->format('Y-m-d H:i:s')
-        );
-
-        $this->state = $this->checkIfHttpCodeIsCorrect($httpCode) ?
-            new MonitorState(MonitorState::UP) :
-            new MonitorState(MonitorState::DOWN);
     }
 
     public static function create(int $id, string $url, int $interval, int $timeOut): self
@@ -98,11 +93,6 @@ class Monitor
         );
     }
 
-    private function checkIfHttpCodeIsCorrect(int $httpCode): bool
-    {
-        return $httpCode >= 200 && $httpCode < 400;
-    }
-
 
     public function equals(Monitor $other): bool
     {
@@ -111,7 +101,6 @@ class Monitor
             && $this->interval->equals($other->interval)
             && $this->state->equals($other->state)
             && $this->timeOut->equals($other->timeOut);
-
     }
 
 }

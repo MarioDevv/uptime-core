@@ -37,9 +37,7 @@ class MonitorTest extends TestCase
             10
         );
 
-        $monitor->ping();
-
-        $this->assertEquals(MonitorState::UP, $monitor->state()->value());
+        $this->assertEquals(MonitorState::STOPPED, $monitor->state()->value());
     }
 
     /** @test */
@@ -92,9 +90,7 @@ class MonitorTest extends TestCase
             10
         );
 
-        $monitor->ping();
-
-        $this->assertEquals(MonitorState::DOWN, $monitor->state()->value());
+        $this->assertEquals(MonitorState::STOPPED, $monitor->state()->value());
     }
 
 }

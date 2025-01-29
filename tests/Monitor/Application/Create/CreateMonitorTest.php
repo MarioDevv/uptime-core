@@ -5,7 +5,7 @@ namespace Mario\Uptime\Tests\Monitor\Application\Create;
 use Mario\Uptime\Monitor\Application\Create\CreateMonitor;
 use Mario\Uptime\Monitor\Application\Create\CreateMonitorRequest;
 use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Monitor\MonitorUnitTestHelper;
+use Mario\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class CreateMonitorTest extends MonitorUnitTestHelper
 {
@@ -31,8 +31,6 @@ class CreateMonitorTest extends MonitorUnitTestHelper
         );
 
         $this->nextIdentity(1);
-
-        $expectedMonitor->ping();
 
         $this->save($expectedMonitor);
 
