@@ -1,11 +1,11 @@
 <?php
 
-namespace Mario\Uptime\Tests\Monitor\Application\Create;
+namespace MarioDevv\Uptime\Tests\Monitor\Application\Create;
 
-use Mario\Uptime\Monitor\Application\Create\CreateMonitor;
-use Mario\Uptime\Monitor\Application\Create\CreateMonitorRequest;
-use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Tests\Monitor\MonitorUnitTestHelper;
+use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitor;
+use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitorRequest;
+use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class CreateMonitorTest extends MonitorUnitTestHelper
 {

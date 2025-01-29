@@ -1,6 +1,6 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Domain;
+namespace MarioDevv\Uptime\Monitor\Domain;
 
 class MonitorHistoryResponseTime
 {

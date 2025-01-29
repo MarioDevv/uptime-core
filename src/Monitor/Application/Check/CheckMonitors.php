@@ -1,9 +1,9 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Application\Check;
+namespace MarioDevv\Uptime\Monitor\Application\Check;
 
-use Mario\Uptime\Monitor\Domain\MonitorPingService;
-use Mario\Uptime\Monitor\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
+use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
 class CheckMonitors
 {

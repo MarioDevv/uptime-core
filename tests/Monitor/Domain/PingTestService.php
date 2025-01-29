@@ -1,11 +1,11 @@
 <?php
 
-namespace Mario\Uptime\Tests\Monitor\Domain;
+namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use Mario\Uptime\Monitor\Domain\MonitorPingInformation;
-use Mario\Uptime\Monitor\Domain\MonitorPingService;
-use Mario\Uptime\Monitor\Domain\MonitorTimeOut;
-use Mario\Uptime\Monitor\Domain\MonitorUrl;
+use MarioDevv\Uptime\Monitor\Domain\MonitorPingInformation;
+use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
+use MarioDevv\Uptime\Monitor\Domain\MonitorTimeOut;
+use MarioDevv\Uptime\Monitor\Domain\MonitorUrl;
 
 class PingTestService implements MonitorPingService
 {

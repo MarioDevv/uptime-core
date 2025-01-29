@@ -1,11 +1,11 @@
 <?php
 
-namespace Mario\Uptime\Tests\Monitor\Application\Delete;
+namespace MarioDevv\Uptime\Tests\Monitor\Application\Delete;
 
-use Mario\Uptime\Monitor\Application\Delete\DeleteMonitor;
-use Mario\Uptime\Monitor\Application\Delete\DeleteMonitorRequest;
-use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Tests\Monitor\MonitorUnitTestHelper;
+use MarioDevv\Uptime\Monitor\Application\Delete\DeleteMonitor;
+use MarioDevv\Uptime\Monitor\Application\Delete\DeleteMonitorRequest;
+use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class DeleteMonitorTest extends MonitorUnitTestHelper
 {

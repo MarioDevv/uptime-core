@@ -1,12 +1,12 @@
 <?php
 
-namespace Mario\Uptime\Tests\Monitor\Application\Ping;
+namespace MarioDevv\Uptime\Tests\Monitor\Application\Ping;
 
-use Mario\Uptime\Monitor\Application\Ping\Ping;
-use Mario\Uptime\Monitor\Application\Ping\PingRequest;
-use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Tests\Monitor\Domain\PingTestService;
-use Mario\Uptime\Tests\Monitor\MonitorUnitTestHelper;
+use MarioDevv\Uptime\Monitor\Application\Ping\Ping;
+use MarioDevv\Uptime\Monitor\Application\Ping\PingRequest;
+use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Tests\Monitor\Domain\PingTestService;
+use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class PingTest extends MonitorUnitTestHelper
 {

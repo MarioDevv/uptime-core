@@ -1,10 +1,10 @@
 <?php
 
-namespace Mario\Uptime\Tests\Monitor;
+namespace MarioDevv\Uptime\Tests\Monitor;
 
-use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Monitor\Domain\MonitorRepository;
-use Mario\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
+use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
+use MarioDevv\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
 use Mockery;
 use Mockery\MockInterface;
 

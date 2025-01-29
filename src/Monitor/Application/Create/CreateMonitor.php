@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Mario\Uptime\Monitor\Application\Create;
+namespace MarioDevv\Uptime\Monitor\Application\Create;
 
-use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Monitor\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
 class CreateMonitor
 {

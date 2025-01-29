@@ -1,6 +1,6 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Application\Create;
+namespace MarioDevv\Uptime\Monitor\Application\Create;
 
 class CreateMonitorRequest
 {

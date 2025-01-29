@@ -1,6 +1,6 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Application\Ping;
+namespace MarioDevv\Uptime\Monitor\Application\Ping;
 class PingRequest
 {
 

@@ -1,11 +1,11 @@
 {
-  "name": "mario/uptime",
+  "name": "mariodevv/uptime",
   "description": "A simple uptime monitor",
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Mario\\Uptime\\": "src/",
-      "Mario\\Uptime\\Tests\\": "tests/"
+      "MarioDevv\\Uptime\\": "src/",
+      "MarioDevv\\Uptime\\Tests\\": "tests/"
     }
   },
   "authors": [

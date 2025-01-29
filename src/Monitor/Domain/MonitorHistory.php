@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace Mario\Uptime\Monitor\Domain;
+namespace MarioDevv\Uptime\Monitor\Domain;
 
 class MonitorHistory
 {

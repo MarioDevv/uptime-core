@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Mario\Uptime\Monitor\Domain;
+namespace MarioDevv\Uptime\Monitor\Domain;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

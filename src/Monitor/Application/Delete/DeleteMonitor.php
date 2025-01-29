@@ -1,8 +1,8 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Application\Delete;
+namespace MarioDevv\Uptime\Monitor\Application\Delete;
 
-use Mario\Uptime\Monitor\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
 class DeleteMonitor
 {

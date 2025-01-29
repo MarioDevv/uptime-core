@@ -1,6 +1,6 @@
 <?php
 
-namespace Mario\Uptime\Monitor\Application\Delete;
+namespace MarioDevv\Uptime\Monitor\Application\Delete;
 
 class DeleteMonitorRequest
 {

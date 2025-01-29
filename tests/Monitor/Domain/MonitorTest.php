@@ -1,10 +1,10 @@
 <?php
 
-namespace Mario\Uptime\Tests\Monitor\Domain;
+namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use Mario\Uptime\Monitor\Domain\Monitor;
-use Mario\Uptime\Monitor\Domain\MonitorHistory;
-use Mario\Uptime\Monitor\Domain\MonitorState;
+use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitor\Domain\MonitorHistory;
+use MarioDevv\Uptime\Monitor\Domain\MonitorState;
 
 use PHPUnit\Framework\TestCase;
 
