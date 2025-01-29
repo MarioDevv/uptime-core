@@ -5,7 +5,7 @@ namespace MarioDevv\Uptime\Monitor\Domain;
 class MonitorHistory
 {
 
-    private int $surrogatedId;
+    private int $surrogateId;
 
     private int $monitorId;
     private MonitorHistoryPingedAt $pingedAt;
