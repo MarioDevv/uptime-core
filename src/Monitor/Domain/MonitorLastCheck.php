@@ -27,6 +27,15 @@ class MonitorLastCheck
         return $this->value;
     }
 
+    public function format(string $format = 'Y-m-d H:i:s'): string
+    {
+        if ($this->value === null) {
+            return '';
+        }
+
+        return $this->value->format($format);
+    }
+
     public function isOlderThan(MonitorInterval $interval): bool
     {
         if ($this->value === null) {

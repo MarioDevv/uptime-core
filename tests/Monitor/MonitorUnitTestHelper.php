@@ -2,6 +2,8 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor;
 
+use CodelyTv\Criteria\Criteria;
+use MarioDevv\Uptime\Monitor\Application\MonitorAssemblerInterface;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 use MarioDevv\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
@@ -12,6 +14,7 @@ class MonitorUnitTestHelper extends UnitTestCase
 {
 
     private MonitorRepository|null $repository = null;
+    private MonitorAssemblerInterface|null $assembler = null;
 
     public function nextIdentity(int $id): void
     {
@@ -24,9 +27,7 @@ class MonitorUnitTestHelper extends UnitTestCase
     {
         $this->repository()
             ->shouldReceive('save')
-            ->with(Mockery::on(function (Monitor $argument) use ($monitor) {
-                return $argument->equals($monitor);
-            }))
+            ->with($this->equalTo($monitor))
             ->once();
     }
 
@@ -45,6 +46,14 @@ class MonitorUnitTestHelper extends UnitTestCase
             ->andReturn($monitors);
     }
 
+    public function matching(Criteria $criteria, array $monitors): void
+    {
+        $this->repository()
+            ->shouldReceive('matching')
+            ->with($this->equalTo($criteria))
+            ->andReturn($monitors);
+    }
+
     protected function delete(Monitor $monitor): void
     {
         $this->repository()
@@ -53,9 +62,21 @@ class MonitorUnitTestHelper extends UnitTestCase
             ->once();
     }
 
+    protected function assemble(Monitor $monitor, mixed $dto): void
+    {
+        $this->assembler()
+            ->shouldReceive('assemble')
+            ->with($this->equalTo($monitor))
+            ->andReturn($dto);
+    }
+
     protected function repository(): MockInterface
     {
         return $this->repository ??= $this->mock(MonitorRepository::class);
+    }
 
+    protected function assembler(): MockInterface
+    {
+        return $this->assembler ??= $this->mock(MonitorAssemblerInterface::class);
     }
 }
