@@ -3,7 +3,7 @@
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Search;
 
 use CodelyTv\Criteria\Criteria;
-use MarioDevv\Uptime\Monitor\Application\Search\PaginatedMonitorDTO;
+use MarioDevv\Uptime\Monitor\Application\PaginatedMonitorDTO;
 use MarioDevv\Uptime\Monitor\Application\Search\SearchMonitors;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;

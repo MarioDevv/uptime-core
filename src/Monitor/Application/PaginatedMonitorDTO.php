@@ -1,6 +1,6 @@
 <?php
 
-namespace MarioDevv\Uptime\Monitor\Application\Search;
+namespace MarioDevv\Uptime\Monitor\Application;
 
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 

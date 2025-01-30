@@ -106,6 +106,28 @@ class Monitor
         return $this->history->toArray();
     }
 
+    public function responseTimeAvg(): float
+    {
+        return $this->history->isEmpty()
+            ? 0
+            : array_sum($this->history->map(fn(MonitorHistory $history) => $history->responseTime())->toArray()) / $this->history->count();
+    }
+
+    public function responseTimeMax(): float
+    {
+        return $this->history->isEmpty()
+            ? 0
+            : max($this->history->map(fn(MonitorHistory $history) => $history->responseTime())->toArray());
+    }
+
+    public function responseTimeMin(): float
+    {
+        return $this->history->isEmpty()
+            ? 0
+            : min($this->history->map(fn(MonitorHistory $history) => $history->responseTime())->toArray());
+    }
+
+
     public static function create(int $id, string $url, int $interval, int $timeOut): self
     {
         return new self(
@@ -127,5 +149,6 @@ class Monitor
             && $this->state->equals($other->state)
             && $this->timeOut->equals($other->timeOut);
     }
+
 
 }
