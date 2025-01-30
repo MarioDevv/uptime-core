@@ -9,7 +9,7 @@ class PaginatedMonitorDTO
 
     private int     $id;
     private string  $url;
-    private string  $status;
+    private int     $status;
     private ?string $lastCheck;
 
     public function __construct(Monitor $monitor, ...$args)
