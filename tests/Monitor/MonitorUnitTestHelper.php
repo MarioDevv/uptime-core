@@ -62,12 +62,11 @@ class MonitorUnitTestHelper extends UnitTestCase
             ->once();
     }
 
-    protected function assemble(Monitor $monitor, mixed $dto): void
+    protected function assemble(Monitor $monitor): void
     {
         $this->assembler()
             ->shouldReceive('assemble')
-            ->with($this->equalTo($monitor))
-            ->andReturn($dto);
+            ->with($this->equalTo($monitor));
     }
 
     protected function repository(): MockInterface

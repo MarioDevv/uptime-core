@@ -3,7 +3,6 @@
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Search;
 
 use CodelyTv\Criteria\Criteria;
-use MarioDevv\Uptime\Monitor\Application\PaginatedMonitorDTO;
 use MarioDevv\Uptime\Monitor\Application\Search\SearchMonitors;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
@@ -34,20 +33,7 @@ class SearchMonitorsTest extends MonitorUnitTestHelper
 
         foreach ($expectedMonitors as $monitor) {
 
-            $expectedDto = new PaginatedMonitorDTO($monitor);
-
-            $expectedArray = [
-                'id'        => $monitor->id(),
-                'url'       => $monitor->url()->value(),
-                'status'    => $monitor->state()->value(),
-                'lastCheck' => $monitor->lastCheck()->format(),
-            ];
-
-            $this->assemble($monitor, $expectedDto);
-
-            $this->assertEquals($expectedArray, $expectedDto->json());
-
-
+            $this->assemble($monitor);
         }
 
         ($this->searchMonitors)($expectedCriteria);

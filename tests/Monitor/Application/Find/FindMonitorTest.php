@@ -2,12 +2,10 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Find;
 
-use MarioDevv\Uptime\Monitor\Application\CompleteMonitorDTO;
 use MarioDevv\Uptime\Monitor\Application\Find\FindMonitor;
 use MarioDevv\Uptime\Monitor\Application\Find\FindMonitorRequest;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
-use PHPUnit\Framework\TestCase;
 
 class FindMonitorTest extends MonitorUnitTestHelper
 {
@@ -27,11 +25,10 @@ class FindMonitorTest extends MonitorUnitTestHelper
 
         $this->find($expectedMonitor->id(), $expectedMonitor);
 
-        $this->assemble($expectedMonitor, new CompleteMonitorDTO($expectedMonitor));
+        $this->assemble($expectedMonitor);
 
-        $monitorDto = ($this->findMonitor)(new FindMonitorRequest(1));
+        ($this->findMonitor)(new FindMonitorRequest(1));
 
-        $this->assertEquals((new CompleteMonitorDTO($expectedMonitor))->json(), $monitorDto->json());
     }
 
 
