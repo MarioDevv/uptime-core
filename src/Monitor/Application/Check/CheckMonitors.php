@@ -2,6 +2,7 @@
 
 namespace MarioDevv\Uptime\Monitor\Application\Check;
 
+use CodelyTv\Criteria\Criteria;
 use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
@@ -20,10 +21,10 @@ class CheckMonitors
         $this->pingService = $pingService;
     }
 
-    public function __invoke(): void
+    public function __invoke(Criteria $criteria): void
     {
 
-        $array = $this->repository->all();
+        $array = $this->repository->matching($criteria);
 
         foreach ($array as $monitor) {
 
