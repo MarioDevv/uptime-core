@@ -5,7 +5,7 @@ namespace MarioDevv\Uptime\Monitor\Application\Ping;
 use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
-class Ping
+class PingMonitor
 {
 
     private MonitorRepository  $repository;
@@ -21,7 +21,7 @@ class Ping
     /**
      * @throws \Exception
      */
-    public function __invoke(PingRequest $request): void
+    public function __invoke(PingMonitorRequest $request): void
     {
 
         $monitor = $this->repository->byId($request->id());

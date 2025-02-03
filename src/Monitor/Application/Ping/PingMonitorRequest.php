@@ -1,7 +1,7 @@
 <?php
 
 namespace MarioDevv\Uptime\Monitor\Application\Ping;
-class PingRequest
+class PingMonitorRequest
 {
 
     private int $id;
