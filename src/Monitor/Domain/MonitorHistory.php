@@ -23,9 +23,10 @@ class MonitorHistory
         float               $responseTime
     )
     {
-        $this->pingedAt     = $pingedAt;
-        $this->state        = $state;
-        $this->responseTime = $responseTime;
+        $this->httpStatusCode = $httpStatusCode;
+        $this->pingedAt       = $pingedAt;
+        $this->state          = $state;
+        $this->responseTime   = $responseTime;
     }
 
     public function httpStatusCode(): int
