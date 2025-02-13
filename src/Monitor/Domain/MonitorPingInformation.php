@@ -7,9 +7,9 @@ use DateTimeImmutable;
 class MonitorPingInformation
 {
 
-    private int               $state;
-    private float             $responseTime;
-    private DateTimeImmutable $sslExpiration;
+    private int                $state;
+    private float              $responseTime;
+    private ?DateTimeImmutable $sslExpiration;
 
     public function __construct(int $state, float $responseTime, DateTimeImmutable $sslExpiration)
     {
@@ -28,7 +28,7 @@ class MonitorPingInformation
         return $this->responseTime;
     }
 
-    public function sslExpiration(): DateTimeImmutable
+    public function sslExpiration(): ?DateTimeImmutable
     {
         return $this->sslExpiration;
     }

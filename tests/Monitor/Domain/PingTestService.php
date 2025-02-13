@@ -19,7 +19,7 @@ class PingTestService implements MonitorPingService
         $this->responseTime = $responseTime;
     }
 
-    public function ping(MonitorUrl $url, MonitorTimeOut $timeout, ): MonitorPingInformation
+    public function ping(MonitorUrl $url, MonitorTimeOut $timeout): MonitorPingInformation
     {
         return new MonitorPingInformation(
             $this->state,
