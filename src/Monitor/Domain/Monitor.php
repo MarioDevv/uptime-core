@@ -9,12 +9,13 @@ use Doctrine\Common\Collections\Collection;
 class Monitor
 {
 
-    private int $id;
-    private MonitorUrl $url;
-    private MonitorInterval $interval;
-    private MonitorState $state;
-    private MonitorTimeOut $timeOut;
-    private MonitorLastCheck $lastCheck;
+    private int                  $id;
+    private MonitorUrl           $url;
+    private MonitorInterval      $interval;
+    private MonitorState         $state;
+    private MonitorTimeOut       $timeOut;
+    private MonitorLastCheck     $lastCheck;
+    private MonitorSSLExpiration $sslExpiration;
 
     /**
      * @var Collection<MonitorHistory>
@@ -22,21 +23,23 @@ class Monitor
     private Collection $history;
 
     public function __construct(
-        int              $id,
-        MonitorUrl       $url,
-        MonitorInterval  $interval,
-        MonitorState     $state,
-        MonitorTimeOut   $timeOut,
-        MonitorLastCheck $lastCheck,
+        int                  $id,
+        MonitorUrl           $url,
+        MonitorInterval      $interval,
+        MonitorState         $state,
+        MonitorTimeOut       $timeOut,
+        MonitorLastCheck     $lastCheck,
+        MonitorSSLExpiration $sslExpiration,
     )
     {
-        $this->id        = $id;
-        $this->url       = $url;
-        $this->interval  = $interval;
-        $this->state     = $state;
-        $this->timeOut   = $timeOut;
-        $this->lastCheck = $lastCheck;
-        $this->history   = new ArrayCollection();
+        $this->id            = $id;
+        $this->url           = $url;
+        $this->interval      = $interval;
+        $this->state         = $state;
+        $this->timeOut       = $timeOut;
+        $this->lastCheck     = $lastCheck;
+        $this->sslExpiration = $sslExpiration;
+        $this->history       = new ArrayCollection();
     }
 
     public function id(): int
@@ -69,6 +72,12 @@ class Monitor
         return $this->lastCheck;
     }
 
+    public function sslExpiration(): MonitorSSLExpiration
+    {
+        return $this->sslExpiration;
+    }
+
+
     public function shouldCheck(): bool
     {
         return $this->lastCheck->isOlderThan($this->interval);
@@ -83,8 +92,9 @@ class Monitor
 
         $pingInfo = $pingService->ping($this->url, $this->timeOut);
 
-        $this->state     = new MonitorState($pingInfo->state());
-        $this->lastCheck = MonitorLastCheck::now();
+        $this->state         = new MonitorState($pingInfo->state());
+        $this->lastCheck     = MonitorLastCheck::now();
+        $this->sslExpiration = new MonitorSSLExpiration($pingInfo->sslExpiration());
 
         $history = MonitorHistory::fromMonitor($this, $pingInfo->responseTime());
 
@@ -136,7 +146,8 @@ class Monitor
             new MonitorInterval($interval),
             new MonitorState(MonitorState::UP),
             new MonitorTimeOut($timeOut),
-            new MonitorLastCheck(null)
+            new MonitorLastCheck(null),
+            new MonitorSSLExpiration(null)
         );
     }
 
