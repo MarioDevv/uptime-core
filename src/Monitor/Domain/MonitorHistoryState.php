@@ -8,7 +8,6 @@ class MonitorHistoryState
     const int UP = 1;
     const int DOWN = 2;
 
-
     private int $value;
 
     public function __construct(int $state)

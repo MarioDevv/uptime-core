@@ -18,7 +18,7 @@ class PingTest extends MonitorUnitTestHelper
     {
         parent::__construct();
 
-        $this->pingService = new PingTestService(1, 0.1);
+        $this->pingService = new PingTestService(300, 0.1);
 
         $this->ping = new PingMonitor(
             $this->repository(),
@@ -45,4 +45,5 @@ class PingTest extends MonitorUnitTestHelper
 
         ($this->ping)(new PingMonitorRequest(1));
     }
+
 }

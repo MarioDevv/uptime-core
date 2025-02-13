@@ -26,6 +26,13 @@ class MonitorState
         return $this->value;
     }
 
+    public static function fromHttpCode(int $statusCode): self
+    {
+        return ($statusCode >= 100 && $statusCode < 400)
+            ? new MonitorState(self::UP)
+            : new MonitorState(self::DOWN);
+    }
+
     public function equals(MonitorState $other): bool
     {
         return $this->value === $other->value;

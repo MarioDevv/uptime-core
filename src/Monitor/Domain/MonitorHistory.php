@@ -3,19 +3,24 @@ declare(strict_types=1);
 
 namespace MarioDevv\Uptime\Monitor\Domain;
 
+use DateTimeImmutable;
+
 class MonitorHistory
 {
 
     private int $surrogateId;
 
-    private MonitorHistoryPingedAt $pingedAt;
+    private int $httpStatusCode;
+    private DateTimeImmutable $pingedAt;
     private MonitorHistoryState $state;
     private float $responseTime;
 
     public function __construct(
-        MonitorHistoryPingedAt $pingedAt,
-        MonitorHistoryState    $state,
-        float                  $responseTime
+
+        int                 $httpStatusCode,
+        DateTimeImmutable   $pingedAt,
+        MonitorHistoryState $state,
+        float               $responseTime
     )
     {
         $this->pingedAt     = $pingedAt;
@@ -23,8 +28,12 @@ class MonitorHistory
         $this->responseTime = $responseTime;
     }
 
+    public function httpStatusCode(): int
+    {
+        return $this->httpStatusCode;
+    }
 
-    public function pingedAt(): MonitorHistoryPingedAt
+    public function pingedAt(): DateTimeImmutable
     {
         return $this->pingedAt;
     }
@@ -40,22 +49,25 @@ class MonitorHistory
     }
 
     public static function create(
+        int    $statusCode,
         string $pingedAt,
         int    $state,
         float  $responseTime
     ): MonitorHistory
     {
         return new self(
-            new MonitorHistoryPingedAt($pingedAt),
+            $statusCode,
+            new DateTimeImmutable($pingedAt),
             new MonitorHistoryState($state),
             $responseTime
         );
     }
 
-    public static function fromMonitor(Monitor $monitor, float $responseTime): self
+    public static function fromMonitor(Monitor $monitor, int $statusCode, float $responseTime): self
     {
         return new self(
-            new MonitorHistoryPingedAt($monitor->lastCheck()->value()),
+            $statusCode,
+            $monitor->lastCheck()->value(),
             new MonitorHistoryState($monitor->state()->value()),
             $responseTime
         );

@@ -9,12 +9,12 @@ use Doctrine\Common\Collections\Collection;
 class Monitor
 {
 
-    private int                  $id;
-    private MonitorUrl           $url;
-    private MonitorInterval      $interval;
-    private MonitorState         $state;
-    private MonitorTimeOut       $timeOut;
-    private MonitorLastCheck     $lastCheck;
+    private int $id;
+    private MonitorUrl $url;
+    private MonitorInterval $interval;
+    private MonitorState $state;
+    private MonitorTimeOut $timeOut;
+    private MonitorLastCheck $lastCheck;
     private MonitorSSLExpiration $sslExpiration;
 
     /**
@@ -84,19 +84,22 @@ class Monitor
     }
 
     public function ping(MonitorPingService $pingService): void
-
     {
-        if (!$this->shouldCheck() || $this->state->value() === MonitorState::STOPPED) {
+        if (/*!$this->shouldCheck() ||*/ $this->state->value() === MonitorState::STOPPED) {
             return;
         }
 
         $pingInfo = $pingService->ping($this->url, $this->timeOut);
 
-        $this->state         = new MonitorState($pingInfo->state());
+        $this->state         = MonitorState::fromHttpCode($pingInfo->httpStatusCode());
         $this->lastCheck     = MonitorLastCheck::now();
         $this->sslExpiration = new MonitorSSLExpiration($pingInfo->sslExpiration());
 
-        $history = MonitorHistory::fromMonitor($this, $pingInfo->responseTime());
+        $history = MonitorHistory::fromMonitor(
+            $this,
+            $pingInfo->httpStatusCode(),
+            $pingInfo->responseTime()
+        );
 
         $this->addHistory($history);
 
