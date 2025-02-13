@@ -2,6 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
+use DateTimeImmutable;
 use MarioDevv\Uptime\Monitor\Domain\MonitorPingInformation;
 use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
 use MarioDevv\Uptime\Monitor\Domain\MonitorTimeOut;
@@ -18,9 +19,13 @@ class PingTestService implements MonitorPingService
         $this->responseTime = $responseTime;
     }
 
-    public function ping(MonitorUrl $url, MonitorTimeOut $timeout): MonitorPingInformation
+    public function ping(MonitorUrl $url, MonitorTimeOut $timeout, ): MonitorPingInformation
     {
-        return new MonitorPingInformation($this->state, $this->responseTime);
+        return new MonitorPingInformation(
+            $this->state,
+            $this->responseTime,
+            DateTimeImmutable::createFromFormat('Y-m-d', date('Y-m-d')),
+        );
     }
 
 
