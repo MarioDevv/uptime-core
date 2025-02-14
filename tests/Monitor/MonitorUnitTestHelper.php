@@ -7,14 +7,13 @@ use MarioDevv\Uptime\Monitor\Application\MonitorAssemblerInterface;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 use MarioDevv\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
-use Mockery;
 use Mockery\MockInterface;
 
 class MonitorUnitTestHelper extends UnitTestCase
 {
 
-    private MonitorRepository|null $repository = null;
-    private MonitorAssemblerInterface|null $assembler = null;
+    private MonitorRepository|null         $repository = null;
+    private MonitorAssemblerInterface|null $assembler  = null;
 
     public function nextIdentity(int $id): void
     {
@@ -46,13 +45,22 @@ class MonitorUnitTestHelper extends UnitTestCase
             ->andReturn($monitors);
     }
 
-    public function matching(Criteria $criteria, array $monitors): void
+    protected function matching(Criteria $criteria, array $monitors): void
     {
         $this->repository()
             ->shouldReceive('matching')
             ->with($this->equalTo($criteria))
             ->andReturn($monitors);
     }
+
+    protected function countByCriteria(Criteria $criteria, int $count): void
+    {
+        $this->repository()
+            ->shouldReceive('count')
+            ->with($this->equalTo($criteria))
+            ->andReturn($count);
+    }
+
 
     protected function delete(Monitor $monitor): void
     {

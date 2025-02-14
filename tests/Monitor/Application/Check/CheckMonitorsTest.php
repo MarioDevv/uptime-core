@@ -15,7 +15,7 @@ class CheckMonitorsTest extends MonitorUnitTestHelper
 
     protected function setUp(): void
     {
-        parent::__construct();
+        parent::setUp();
 
         $this->pingTestService = new PingTestService(1, 0.1);
 
