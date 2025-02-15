@@ -82,7 +82,7 @@ class MonitorUnitTestHelper extends UnitTestCase
     protected function wasNotified(Monitor $monitor): void
     {
         $this->notifier()
-            ->shouldReceive('down')
+            ->shouldReceive('notify')
             ->with($this->equalTo($monitor))
             ->once();
 

@@ -41,7 +41,7 @@ class PingMonitor
         $monitor->ping($this->pingService);
 
         if ($monitor->isSecondConsecutiveFailure()) {
-            $this->notifier->down($monitor);
+            $this->notifier->notify($monitor);
         }
 
         $this->repository->save($monitor);
