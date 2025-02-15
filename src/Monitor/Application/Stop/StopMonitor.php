@@ -1,13 +1,12 @@
 <?php
 
-namespace MarioDevv\Uptime\Monitor\Application\Delete;
+namespace MarioDevv\Uptime\Monitor\Application\Stop;
 
 use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
-class DeleteMonitor
+class StopMonitor
 {
-
 
     private MonitorRepository $repository;
 
@@ -16,11 +15,10 @@ class DeleteMonitor
         $this->repository = $repository;
     }
 
-
     /**
      * @throws MonitorNotFoundException
      */
-    public function __invoke(DeleteMonitorRequest $request): void
+    public function __invoke(StopMonitorRequest $request): void
     {
 
         $monitor = $this->repository->byId($request->id());
@@ -29,9 +27,10 @@ class DeleteMonitor
             throw new MonitorNotFoundException($request->id());
         }
 
-        $this->repository->delete($monitor);
+        $monitor->stop();
+
+        $this->repository->save($monitor);
 
     }
-
 
 }

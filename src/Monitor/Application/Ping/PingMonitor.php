@@ -2,6 +2,7 @@
 
 namespace MarioDevv\Uptime\Monitor\Application\Ping;
 
+use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
@@ -19,7 +20,7 @@ class PingMonitor
 
 
     /**
-     * @throws \Exception
+     * @throws MonitorNotFoundException
      */
     public function __invoke(PingMonitorRequest $request): void
     {
@@ -27,13 +28,12 @@ class PingMonitor
         $monitor = $this->repository->byId($request->id());
 
         if (null === $monitor) {
-            throw new \Exception('Monitor not found');
+            throw new MonitorNotFoundException($request->id());
         }
 
         $monitor->ping($this->pingService);
 
         $this->repository->save($monitor);
-
 
     }
 

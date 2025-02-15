@@ -3,6 +3,7 @@
 namespace MarioDevv\Uptime\Monitor\Application\Find;
 
 use MarioDevv\Uptime\Monitor\Application\MonitorAssemblerInterface;
+use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 
 class FindMonitor
@@ -18,14 +19,14 @@ class FindMonitor
     }
 
     /**
-     * @throws \Exception
+     * @throws MonitorNotFoundException
      */
     public function __invoke(FindMonitorRequest $request)
     {
         $monitor = $this->repository->byId($request->id());
 
         if (null === $monitor) {
-            throw new \Exception($request->id());
+            throw new MonitorNotFoundException($request->id());
         }
 
         return $this->assembler->assemble($monitor);

@@ -5,6 +5,7 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Delete;
 use MarioDevv\Uptime\Monitor\Application\Delete\DeleteMonitor;
 use MarioDevv\Uptime\Monitor\Application\Delete\DeleteMonitorRequest;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class DeleteMonitorTest extends MonitorUnitTestHelper
@@ -22,8 +23,6 @@ class DeleteMonitorTest extends MonitorUnitTestHelper
     public function it_should_delete_a_monitor()
     {
 
-        $this->nextIdentity(1);
-
         $monitor = Monitor::create(1, 'https://www.google.com', 60, 1);
 
         $this->find(1, $monitor);
@@ -32,6 +31,19 @@ class DeleteMonitorTest extends MonitorUnitTestHelper
 
         ($this->deleteMonitor)(new DeleteMonitorRequest(1));
 
+    }
+
+    /** @test */
+    public function it_should_throw_an_error_when_monitor_not_found()
+    {
+
+        $monitor = null;
+
+        $this->find(1, $monitor);
+
+        $this->expectException(MonitorNotFoundException::class);
+
+        ($this->deleteMonitor)(new DeleteMonitorRequest(1));
 
     }
 }

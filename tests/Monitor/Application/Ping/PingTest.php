@@ -5,6 +5,7 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Ping;
 use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitor;
 use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitorRequest;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Tests\Monitor\Domain\PingTestService;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
@@ -30,8 +31,6 @@ class PingTest extends MonitorUnitTestHelper
     public function it_should_ping_a_monitor(): void
     {
 
-        $this->nextIdentity(1);
-
         $monitor = Monitor::create(1, 'https://www.google.com', 60, 1);
 
         $this->find(1, $monitor);
@@ -42,6 +41,20 @@ class PingTest extends MonitorUnitTestHelper
 
         $this->assertEquals(1, $monitor->state()->value());
         $this->assertCount(1, $monitor->history());
+
+        ($this->ping)(new PingMonitorRequest(1));
+    }
+
+
+    /** @test */
+    public function it_should_throw_an_error_when_monitor_not_found(): void
+    {
+
+        $monitor = null;
+
+        $this->find(1, $monitor);
+
+        $this->expectException(MonitorNotFoundException::class);
 
         ($this->ping)(new PingMonitorRequest(1));
     }

@@ -5,6 +5,7 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Find;
 use MarioDevv\Uptime\Monitor\Application\Find\FindMonitor;
 use MarioDevv\Uptime\Monitor\Application\Find\FindMonitorRequest;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class FindMonitorTest extends MonitorUnitTestHelper
@@ -29,6 +30,18 @@ class FindMonitorTest extends MonitorUnitTestHelper
 
         ($this->findMonitor)(new FindMonitorRequest(1));
 
+    }
+
+    /** @test */
+    public function it_should_throw_an_error_when_monitor_not_found(): void
+    {
+        $expectedMonitor = null;
+
+        $this->find(1, $expectedMonitor);
+
+        $this->expectException(MonitorNotFoundException::class);
+
+        ($this->findMonitor)(new FindMonitorRequest(1));
     }
 
 

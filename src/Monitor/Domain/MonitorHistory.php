@@ -49,6 +49,11 @@ class MonitorHistory
         return $this->responseTime;
     }
 
+    public function isFailure(): bool
+    {
+        return $this->httpStatusCode >= 400;
+    }
+
     public static function create(
         int    $statusCode,
         string $pingedAt,

@@ -23,12 +23,12 @@ class Monitor
     private Collection $history;
 
     public function __construct(
-        int                  $id,
-        MonitorUrl           $url,
-        MonitorInterval      $interval,
-        MonitorState         $state,
-        MonitorTimeOut       $timeOut,
-        MonitorLastCheck     $lastCheck,
+        int $id,
+        MonitorUrl $url,
+        MonitorInterval $interval,
+        MonitorState $state,
+        MonitorTimeOut $timeOut,
+        MonitorLastCheck $lastCheck,
         MonitorSSLExpiration $sslExpiration,
     )
     {
@@ -105,6 +105,23 @@ class Monitor
 
     }
 
+    public function isSecondConsecutiveFailure(): bool
+    {
+
+        if ($this->history->count() < 2) {
+            return false;
+        }
+
+        $lastTwo = array_values($this->history->slice(-2, 2));
+
+        return $lastTwo[0]->isFailure() && $lastTwo[1]->isFailure();
+    }
+
+    public function stop(): void
+    {
+        $this->state = new MonitorState(MonitorState::STOPPED);
+    }
+
     public function addHistory(MonitorHistory $history): void
     {
         if ($this->history->count() >= 20) {
@@ -163,6 +180,5 @@ class Monitor
             && $this->state->equals($other->state)
             && $this->timeOut->equals($other->timeOut);
     }
-
 
 }
