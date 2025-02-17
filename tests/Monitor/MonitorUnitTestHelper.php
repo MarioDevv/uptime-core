@@ -6,16 +6,21 @@ use CodelyTv\Criteria\Criteria;
 use MarioDevv\Uptime\Monitor\Application\MonitorAssemblerInterface;
 use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Monitor\Domain\MonitorNotifier;
+use MarioDevv\Uptime\Monitor\Domain\MonitorPingInformation;
+use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
 use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitor\Domain\MonitorTimeOut;
+use MarioDevv\Uptime\Monitor\Domain\MonitorUrl;
 use MarioDevv\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
 use Mockery\MockInterface;
 
 class MonitorUnitTestHelper extends UnitTestCase
 {
 
-    private MonitorRepository|null $repository = null;
-    private MonitorAssemblerInterface|null $assembler = null;
-    private MonitorNotifier|null $notifier = null;
+    private MonitorRepository|null         $repository  = null;
+    private MonitorPingService|null        $pingService = null;
+    private MonitorAssemblerInterface|null $assembler   = null;
+    private MonitorNotifier|null           $notifier    = null;
 
     public function nextIdentity(int $id): void
     {
@@ -72,6 +77,17 @@ class MonitorUnitTestHelper extends UnitTestCase
             ->once();
     }
 
+    protected function ping(MonitorUrl $url, MonitorTimeOut $timeOut, MonitorPingInformation $information): void
+    {
+        $this->pingService()
+            ->shouldReceive('ping')
+            ->with(
+                $this->equalTo($url),
+                $this->equalTo($timeOut)
+            )
+            ->andReturn($information);
+    }
+
     protected function assemble(Monitor $monitor): void
     {
         $this->assembler()
@@ -91,6 +107,11 @@ class MonitorUnitTestHelper extends UnitTestCase
     protected function repository(): MockInterface
     {
         return $this->repository ??= $this->mock(MonitorRepository::class);
+    }
+
+    protected function pingService(): MockInterface
+    {
+        return $this->pingService ??= $this->mock(MonitorPingService::class);
     }
 
     protected function assembler(): MockInterface

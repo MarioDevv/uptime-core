@@ -4,26 +4,24 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Ping;
 
 use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitor;
 use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
-use MarioDevv\Uptime\Tests\Monitor\Domain\PingTestService;
+use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorHistoryMother;
+use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
+use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorPingInformationMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class PingTest extends MonitorUnitTestHelper
 {
 
     private PingMonitor $ping;
-    private PingTestService $pingService;
 
     protected function setUp(): void
     {
         parent::__construct();
 
-        $this->pingService = new PingTestService(300, 0.1);
-
         $this->ping = new PingMonitor(
             $this->repository(),
-            $this->pingService,
+            $this->pingService(),
             $this->notifier()
         );
     }
@@ -32,13 +30,19 @@ class PingTest extends MonitorUnitTestHelper
     public function it_should_ping_a_monitor(): void
     {
 
-        $monitor = Monitor::create(1, 'https://www.google.com', 60, 1);
+        $monitor = MonitorMother::random();
 
-        $this->find(1, $monitor);
+        $this->find($monitor->id(), $monitor);
+
+        $this->ping(
+            $monitor->url(),
+            $monitor->timeOut(),
+            MonitorPingInformationMother::random()
+        );
 
         $this->save($monitor);
 
-        ($this->ping)(new PingMonitorRequest(1));
+        ($this->ping)(new PingMonitorRequest($monitor->id()));
     }
 
 
@@ -59,23 +63,52 @@ class PingTest extends MonitorUnitTestHelper
     public function it_should_notify_if_monitor_has_two_consecutive_fails(): void
     {
 
-        $monitor = Monitor::create(1, 'https://www.google.com', 60, 1);
+        $monitor = MonitorMother::random();
 
-        // Force first fail
-        $monitor->ping(new PingTestService(400, 0.2));
+        $firstFail     = MonitorHistoryMother::random(httpCode: 400);
+        $monitor->addHistory($firstFail);
 
-        $this->find(1, $monitor);
+        $this->find($monitor->id(), $monitor);
+
+        $this->ping(
+            $monitor->url(),
+            $monitor->timeOut(),
+            MonitorPingInformationMother::random(httpCode: 400)
+        );
+
         $this->wasNotified($monitor);
 
         $this->save($monitor);
 
-        $this->ping = new PingMonitor(
-            $this->repository(),
-            new PingTestService(400, 0.2),
-            $this->notifier()
+        ($this->ping)(new PingMonitorRequest($monitor->id()));
+    }
+
+
+    /** @test */
+    public function it_should_not_notify_if_failures_are_not_consecutive(): void
+    {
+        $monitor = MonitorMother::random();
+
+        $firstFail = MonitorHistoryMother::random(httpCode: 404);
+        $monitor->addHistory($firstFail);
+
+        $secondSuccess = MonitorHistoryMother::random(httpCode: 200);
+        $monitor->addHistory($secondSuccess);
+
+        $this->find($monitor->id(), $monitor);
+
+        $this->ping(
+            $monitor->url(),
+            $monitor->timeOut(),
+            MonitorPingInformationMother::random(httpCode: 404)
         );
 
-        ($this->ping)(new PingMonitorRequest(1));
+        $this->notifier()->shouldNotReceive('notify');
+
+        $this->save($monitor);
+
+        ($this->ping)(new PingMonitorRequest($monitor->id()));
     }
+
 
 }

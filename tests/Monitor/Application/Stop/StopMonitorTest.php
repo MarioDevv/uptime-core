@@ -4,8 +4,8 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Stop;
 
 use MarioDevv\Uptime\Monitor\Application\Stop\StopMonitor;
 use MarioDevv\Uptime\Monitor\Application\Stop\StopMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
 use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
+use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class StopMonitorTest extends MonitorUnitTestHelper
@@ -25,7 +25,7 @@ class StopMonitorTest extends MonitorUnitTestHelper
     public function it_should_stop_a_monitor()
     {
 
-        $expectedMonitor = Monitor::create(1, 'https://example.com', 30, 1);
+        $expectedMonitor = MonitorMother::random();
 
         $this->find($expectedMonitor->id(), $expectedMonitor);
 
@@ -33,7 +33,7 @@ class StopMonitorTest extends MonitorUnitTestHelper
 
         $this->save($expectedMonitor);
 
-        ($this->stopMonitor)(new StopMonitorRequest(1));
+        ($this->stopMonitor)(new StopMonitorRequest($expectedMonitor->id()));
 
     }
 

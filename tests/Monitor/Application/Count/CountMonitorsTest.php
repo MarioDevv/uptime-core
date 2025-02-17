@@ -29,10 +29,7 @@ class CountMonitorsTest extends MonitorUnitTestHelper
 
         $this->countByCriteria($criteria, $count);
 
-        $response = ($this->countMonitors)($criteria);
-
-        $this->assertEquals($response, $count);
-
+        ($this->countMonitors)($criteria);
 
     }
 

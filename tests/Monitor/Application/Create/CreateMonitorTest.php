@@ -4,7 +4,7 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Create;
 
 use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitor;
 use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class CreateMonitorTest extends MonitorUnitTestHelper
@@ -23,23 +23,19 @@ class CreateMonitorTest extends MonitorUnitTestHelper
     public function it_should_create_a_monitor(): void
     {
 
-        $expectedMonitor = Monitor::create(
-            1,
+        $request = new CreateMonitorRequest(
             'https://www.google.com',
             60,
             1,
         );
 
-        $this->nextIdentity(1);
+        $expectedMonitor = MonitorMother::fromCreateRequest($request);
+
+        $this->nextIdentity($expectedMonitor->id());
 
         $this->save($expectedMonitor);
 
-        ($this->createMonitor)
-        (new CreateMonitorRequest(
-            'https://www.google.com',
-            60,
-            1,
-        ));
+        ($this->createMonitor)($request);
 
     }
 

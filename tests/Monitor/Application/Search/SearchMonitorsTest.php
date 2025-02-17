@@ -4,7 +4,7 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Search;
 
 use CodelyTv\Criteria\Criteria;
 use MarioDevv\Uptime\Monitor\Application\Search\SearchMonitors;
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class SearchMonitorsTest extends MonitorUnitTestHelper
@@ -32,7 +32,6 @@ class SearchMonitorsTest extends MonitorUnitTestHelper
         $this->matching($expectedCriteria, $expectedMonitors);
 
         foreach ($expectedMonitors as $monitor) {
-
             $this->assemble($monitor);
         }
 
@@ -47,11 +46,7 @@ class SearchMonitorsTest extends MonitorUnitTestHelper
         $array = [];
 
         for ($i = 0; $i < 10; $i++) {
-
-            $monitor = Monitor::create($i + 1, 'https://www.google.com', 60, 1);
-
-            $array[] = $monitor;
-
+            $array[] = MonitorMother::random();
         }
 
         return $array;
