@@ -3,7 +3,7 @@
 namespace MarioDevv\Uptime\Monitoring\Application\Count;
 
 use CodelyTv\Criteria\Criteria;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorRepository;
 
 class CountMonitors
 {

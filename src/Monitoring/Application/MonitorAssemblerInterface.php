@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Monitoring\Application;
 
-use MarioDevv\Uptime\Monitoring\Domain\Monitor;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\Monitor;
 
 interface MonitorAssemblerInterface
 {

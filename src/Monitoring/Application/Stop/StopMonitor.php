@@ -2,8 +2,8 @@
 
 namespace MarioDevv\Uptime\Monitoring\Application\Stop;
 
-use MarioDevv\Uptime\Monitoring\Domain\MonitorNotFoundException;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorNotFoundException;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorRepository;
 
 class StopMonitor
 {

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace MarioDevv\Uptime\Monitoring\Application\Create;
 
-use MarioDevv\Uptime\Monitoring\Domain\Monitor;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\Monitor;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorRepository;
 
 class CreateMonitor
 {

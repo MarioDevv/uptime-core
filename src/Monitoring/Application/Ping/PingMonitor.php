@@ -2,10 +2,10 @@
 
 namespace MarioDevv\Uptime\Monitoring\Application\Ping;
 
-use MarioDevv\Uptime\Monitoring\Domain\MonitorNotFoundException;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorNotifier;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorPingService;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorNotFoundException;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorNotifier;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorPingService;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorRepository;
 
 class PingMonitor
 {

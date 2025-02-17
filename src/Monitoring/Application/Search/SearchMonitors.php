@@ -4,7 +4,7 @@ namespace MarioDevv\Uptime\Monitoring\Application\Search;
 
 use CodelyTv\Criteria\Criteria;
 use MarioDevv\Uptime\Monitoring\Application\MonitorAssemblerInterface;
-use MarioDevv\Uptime\Monitoring\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitoring\Domain\Model\Monitor\MonitorRepository;
 
 class SearchMonitors
 {
