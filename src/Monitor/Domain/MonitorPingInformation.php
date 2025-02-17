@@ -7,14 +7,14 @@ use DateTimeImmutable;
 class MonitorPingInformation
 {
 
-    private int $httpStatusCode;
-    private float $responseTime;
+    private int                $httpStatusCode;
+    private float              $responseTime;
     private ?DateTimeImmutable $sslExpiration;
 
     public function __construct(
-        int               $httpStatusCode,
-        float             $responseTime,
-        DateTimeImmutable $sslExpiration
+        int                $httpStatusCode,
+        float              $responseTime,
+        ?DateTimeImmutable $sslExpiration
     )
     {
         $this->httpStatusCode = $httpStatusCode;
