@@ -9,12 +9,12 @@ use Doctrine\Common\Collections\Collection;
 class Monitor
 {
 
-    private int $id;
-    private MonitorUrl $url;
-    private MonitorInterval $interval;
-    private MonitorState $state;
-    private MonitorTimeOut $timeOut;
-    private MonitorLastCheck $lastCheck;
+    private int                  $id;
+    private MonitorUrl           $url;
+    private MonitorInterval      $interval;
+    private MonitorState         $state;
+    private MonitorTimeOut       $timeOut;
+    private MonitorLastCheck     $lastCheck;
     private MonitorSSLExpiration $sslExpiration;
 
     /**
@@ -23,12 +23,12 @@ class Monitor
     private Collection $history;
 
     public function __construct(
-        int $id,
-        MonitorUrl $url,
-        MonitorInterval $interval,
-        MonitorState $state,
-        MonitorTimeOut $timeOut,
-        MonitorLastCheck $lastCheck,
+        int                  $id,
+        MonitorUrl           $url,
+        MonitorInterval      $interval,
+        MonitorState         $state,
+        MonitorTimeOut       $timeOut,
+        MonitorLastCheck     $lastCheck,
         MonitorSSLExpiration $sslExpiration,
     )
     {
@@ -122,6 +122,16 @@ class Monitor
         $this->state = new MonitorState(MonitorState::STOPPED);
     }
 
+    public function resume(): void
+    {
+
+        if ($this->state->value() !== MonitorState::STOPPED) {
+            return;
+        }
+
+        $this->state = new MonitorState(MonitorState::PENDING);
+    }
+
     public function addHistory(MonitorHistory $history): void
     {
         $this->history->add($history);
@@ -180,5 +190,6 @@ class Monitor
             && $this->state->equals($other->state)
             && $this->timeOut->equals($other->timeOut);
     }
+
 
 }

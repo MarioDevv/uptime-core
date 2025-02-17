@@ -17,7 +17,8 @@ class MonitorStateMother
             Number::inArray([
                 MonitorState::UP,
                 MonitorState::DOWN,
-                MonitorState::STOPPED
+                MonitorState::STOPPED,
+                MonitorState::PENDING
             ])
         );
     }

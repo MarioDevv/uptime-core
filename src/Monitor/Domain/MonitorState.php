@@ -8,13 +8,14 @@ class MonitorState
     const int UP      = 1;
     const int DOWN    = 2;
     const int STOPPED = 3;
+    const int PENDING = 4;
 
 
     private int $value;
 
     public function __construct(int $state)
     {
-        if (!in_array($state, [self::UP, self::DOWN, self::STOPPED])) {
+        if (!in_array($state, [self::UP, self::DOWN, self::STOPPED, self::PENDING])) {
             throw new \InvalidArgumentException('Invalid state');
         }
 

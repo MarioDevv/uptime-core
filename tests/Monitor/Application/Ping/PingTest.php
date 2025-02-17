@@ -18,7 +18,7 @@ class PingTest extends MonitorUnitTestHelper
 
     protected function setUp(): void
     {
-        parent::__construct();
+        parent::setUp();
 
         $this->ping = new PingMonitor(
             $this->repository(),

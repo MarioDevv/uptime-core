@@ -12,6 +12,7 @@ use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
 use MarioDevv\Uptime\Monitor\Domain\MonitorTimeOut;
 use MarioDevv\Uptime\Monitor\Domain\MonitorUrl;
 use MarioDevv\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
+use Mockery;
 use Mockery\MockInterface;
 
 class MonitorUnitTestHelper extends UnitTestCase
@@ -33,7 +34,9 @@ class MonitorUnitTestHelper extends UnitTestCase
     {
         $this->repository()
             ->shouldReceive('save')
-            ->with($this->equalTo($monitor))
+            ->with(Mockery::on(function ($value) use ($monitor) {
+                return $monitor->equals($value);
+            }))
             ->once();
     }
 
