@@ -15,7 +15,7 @@ class DeleteMonitorTest extends MonitorUnitTestHelper
 
     protected function setUp(): void
     {
-        parent::__construct();
+        parent::setUp();
         $this->deleteMonitor = new DeleteMonitor($this->repository());
     }
 

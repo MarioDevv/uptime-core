@@ -5,6 +5,7 @@ namespace MarioDevv\Uptime\Tests\Monitor\Application\Ping;
 use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitor;
 use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitorRequest;
 use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
+use MarioDevv\Uptime\Monitor\Domain\MonitorState;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorHistoryMother;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorPingInformationMother;
@@ -30,9 +31,10 @@ class PingTest extends MonitorUnitTestHelper
     public function it_should_ping_a_monitor(): void
     {
 
-        $monitor = MonitorMother::random();
+        $monitor = MonitorMother::random(state: MonitorState::UP);
 
         $this->find($monitor->id(), $monitor);
+
 
         $this->ping(
             $monitor->url(),
@@ -43,6 +45,7 @@ class PingTest extends MonitorUnitTestHelper
         $this->save($monitor);
 
         ($this->ping)(new PingMonitorRequest($monitor->id()));
+
     }
 
 
@@ -63,10 +66,11 @@ class PingTest extends MonitorUnitTestHelper
     public function it_should_notify_if_monitor_has_two_consecutive_fails(): void
     {
 
-        $monitor = MonitorMother::random();
+        $monitor = MonitorMother::random(state: MonitorState::DOWN);
 
-        $firstFail     = MonitorHistoryMother::random(httpCode: 400);
+        $firstFail = MonitorHistoryMother::random(httpCode: 400);
         $monitor->addHistory($firstFail);
+
 
         $this->find($monitor->id(), $monitor);
 
@@ -87,7 +91,7 @@ class PingTest extends MonitorUnitTestHelper
     /** @test */
     public function it_should_not_notify_if_failures_are_not_consecutive(): void
     {
-        $monitor = MonitorMother::random();
+        $monitor = MonitorMother::random(state: MonitorState::DOWN);
 
         $firstFail = MonitorHistoryMother::random(httpCode: 404);
         $monitor->addHistory($firstFail);
