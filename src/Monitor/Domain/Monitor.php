@@ -127,7 +127,7 @@ class Monitor
         $this->history->add($history);
 
         if ($this->history->count() > 20) {
-            $this->history->remove($this->history->count() - 1);
+            $this->history->remove(0);
         }
     }
 
