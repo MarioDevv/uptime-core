@@ -174,7 +174,7 @@ class Monitor
             $id,
             new MonitorUrl($url),
             new MonitorInterval($interval),
-            new MonitorState(MonitorState::UP),
+            new MonitorState(MonitorState::PENDING),
             new MonitorTimeOut($timeOut),
             new MonitorLastCheck(null),
             new MonitorSSLExpiration(null)
