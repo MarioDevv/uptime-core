@@ -124,11 +124,11 @@ class Monitor
 
     public function addHistory(MonitorHistory $history): void
     {
-        if ($this->history->count() >= 20) {
-            $this->history->remove(0);
-        }
-
         $this->history->add($history);
+
+        if ($this->history->count() > 20) {
+            $this->history->remove($this->history->count() - 1);
+        }
     }
 
     public function history(): array
