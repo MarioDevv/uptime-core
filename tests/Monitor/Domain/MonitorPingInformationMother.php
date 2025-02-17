@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Domain\MonitorPingInformation;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorPingInformation;
 use MarioDevv\Uptime\Tests\Utils\Domain\Date;
 
 class MonitorPingInformationMother

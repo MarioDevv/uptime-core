@@ -2,10 +2,10 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Ping;
 
-use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitor;
-use MarioDevv\Uptime\Monitor\Application\Ping\PingMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
-use MarioDevv\Uptime\Monitor\Domain\MonitorState;
+use MarioDevv\Uptime\Monitoring\Application\Ping\PingMonitor;
+use MarioDevv\Uptime\Monitoring\Application\Ping\PingMonitorRequest;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorNotFoundException;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorState;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorHistoryMother;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorPingInformationMother;

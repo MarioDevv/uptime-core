@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Domain\MonitorTimeOut;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorTimeOut;
 use MarioDevv\Uptime\Tests\Utils\Domain\Number;
 
 class MonitorTimeOutMother

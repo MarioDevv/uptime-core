@@ -2,9 +2,9 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Resume;
 
-use MarioDevv\Uptime\Monitor\Application\Resume\ResumeMonitor;
-use MarioDevv\Uptime\Monitor\Application\Resume\ResumeMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\MonitorState;
+use MarioDevv\Uptime\Monitoring\Application\Resume\ResumeMonitor;
+use MarioDevv\Uptime\Monitoring\Application\Resume\ResumeMonitorRequest;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorState;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 

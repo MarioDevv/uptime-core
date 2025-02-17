@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Domain\MonitorState;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorState;
 use MarioDevv\Uptime\Tests\Utils\Domain\Number;
 
 class MonitorStateMother

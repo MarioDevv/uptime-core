@@ -2,8 +2,8 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitoring\Application\Create\CreateMonitorRequest;
+use MarioDevv\Uptime\Monitoring\Domain\Monitor;
 
 class MonitorMother
 {

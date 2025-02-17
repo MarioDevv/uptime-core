@@ -3,7 +3,7 @@
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
 use DateTimeImmutable;
-use MarioDevv\Uptime\Monitor\Domain\MonitorSSLExpiration;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorSSLExpiration;
 use MarioDevv\Uptime\Tests\Utils\Domain\Date;
 
 class MonitorSSLExpirationMother

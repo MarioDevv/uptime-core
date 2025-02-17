@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Domain\MonitorHistory;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorHistory;
 use MarioDevv\Uptime\Tests\Utils\Domain\Date;
 
 class MonitorHistoryMother

@@ -2,9 +2,9 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Stop;
 
-use MarioDevv\Uptime\Monitor\Application\Stop\StopMonitor;
-use MarioDevv\Uptime\Monitor\Application\Stop\StopMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
+use MarioDevv\Uptime\Monitoring\Application\Stop\StopMonitor;
+use MarioDevv\Uptime\Monitoring\Application\Stop\StopMonitorRequest;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 

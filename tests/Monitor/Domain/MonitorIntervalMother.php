@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Domain\MonitorInterval;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorInterval;
 use MarioDevv\Uptime\Tests\Utils\Domain\Number;
 
 class MonitorIntervalMother

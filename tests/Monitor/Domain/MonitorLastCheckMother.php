@@ -3,7 +3,7 @@
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
 use DateTimeImmutable;
-use MarioDevv\Uptime\Monitor\Domain\MonitorLastCheck;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorLastCheck;
 use MarioDevv\Uptime\Tests\Utils\Domain\Date;
 
 class MonitorLastCheckMother

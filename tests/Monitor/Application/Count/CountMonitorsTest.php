@@ -3,7 +3,7 @@
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Count;
 
 use CodelyTv\Criteria\Criteria;
-use MarioDevv\Uptime\Monitor\Application\Count\CountMonitors;
+use MarioDevv\Uptime\Monitoring\Application\Count\CountMonitors;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
 class CountMonitorsTest extends MonitorUnitTestHelper

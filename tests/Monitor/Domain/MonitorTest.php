@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Domain;
 
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
+use MarioDevv\Uptime\Monitoring\Domain\Monitor;
 
 use PHPUnit\Framework\TestCase;
 

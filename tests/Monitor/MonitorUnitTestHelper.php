@@ -3,14 +3,14 @@
 namespace MarioDevv\Uptime\Tests\Monitor;
 
 use CodelyTv\Criteria\Criteria;
-use MarioDevv\Uptime\Monitor\Application\MonitorAssemblerInterface;
-use MarioDevv\Uptime\Monitor\Domain\Monitor;
-use MarioDevv\Uptime\Monitor\Domain\MonitorNotifier;
-use MarioDevv\Uptime\Monitor\Domain\MonitorPingInformation;
-use MarioDevv\Uptime\Monitor\Domain\MonitorPingService;
-use MarioDevv\Uptime\Monitor\Domain\MonitorRepository;
-use MarioDevv\Uptime\Monitor\Domain\MonitorTimeOut;
-use MarioDevv\Uptime\Monitor\Domain\MonitorUrl;
+use MarioDevv\Uptime\Monitoring\Application\MonitorAssemblerInterface;
+use MarioDevv\Uptime\Monitoring\Domain\Monitor;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorNotifier;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorPingInformation;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorPingService;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorRepository;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorTimeOut;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorUrl;
 use MarioDevv\Uptime\Tests\Utils\Infrastructure\UnitTestCase;
 use Mockery;
 use Mockery\MockInterface;

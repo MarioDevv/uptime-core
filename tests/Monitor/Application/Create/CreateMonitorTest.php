@@ -2,8 +2,8 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Create;
 
-use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitor;
-use MarioDevv\Uptime\Monitor\Application\Create\CreateMonitorRequest;
+use MarioDevv\Uptime\Monitoring\Application\Create\CreateMonitor;
+use MarioDevv\Uptime\Monitoring\Application\Create\CreateMonitorRequest;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 

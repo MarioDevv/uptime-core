@@ -2,9 +2,9 @@
 
 namespace MarioDevv\Uptime\Tests\Monitor\Application\Delete;
 
-use MarioDevv\Uptime\Monitor\Application\Delete\DeleteMonitor;
-use MarioDevv\Uptime\Monitor\Application\Delete\DeleteMonitorRequest;
-use MarioDevv\Uptime\Monitor\Domain\MonitorNotFoundException;
+use MarioDevv\Uptime\Monitoring\Application\Delete\DeleteMonitor;
+use MarioDevv\Uptime\Monitoring\Application\Delete\DeleteMonitorRequest;
+use MarioDevv\Uptime\Monitoring\Domain\MonitorNotFoundException;
 use MarioDevv\Uptime\Tests\Monitor\Domain\MonitorMother;
 use MarioDevv\Uptime\Tests\Monitor\MonitorUnitTestHelper;
 
