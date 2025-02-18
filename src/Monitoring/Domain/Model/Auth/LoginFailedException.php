@@ -2,7 +2,7 @@
 
 namespace MarioDevv\Uptime\Monitoring\Domain\Model\Auth;
 
-use MarioDevv\Uptime\Shared\Domain\DomainException;
+use MarioDevv\Uptime\Monitoring\Domain\DomainException;
 
 class LoginFailedException extends DomainException
 {
