@@ -21,6 +21,7 @@ class CreateMonitor
 
         $monitor = Monitor::create(
             $this->repository->nextIdentity(),
+            $request->userID(),
             $request->url(),
             $request->interval(),
             $request->timeOut()

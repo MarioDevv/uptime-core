@@ -24,6 +24,7 @@ class CreateMonitorTest extends MonitorUnitTestHelper
     {
 
         $request = new CreateMonitorRequest(
+            rand(1, 10),
             'https://www.google.com',
             60,
             1,

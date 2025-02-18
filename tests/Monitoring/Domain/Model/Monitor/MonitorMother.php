@@ -10,6 +10,7 @@ class MonitorMother
 
     public static function random(
         ?int    $id = null,
+        ?int    $userID = null,
         ?string $url = null,
         ?int    $interval = null,
         ?int    $state = null,
@@ -18,6 +19,7 @@ class MonitorMother
     {
         return new Monitor(
             $id ?? rand(1, 100),
+            $userID ?? rand(1, 100),
             MonitorUrlMother::random($url),
             MonitorIntervalMother::random($interval),
             MonitorStateMother::random($state),
@@ -32,6 +34,7 @@ class MonitorMother
     {
         return Monitor::create(
             rand(1, 100),
+            $request->userID(),
             $request->url(),
             $request->interval(),
             $request->timeOut()

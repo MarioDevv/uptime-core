@@ -10,6 +10,7 @@ class Monitor
 {
 
     private int                  $id;
+    private int                  $userID;
     private MonitorUrl           $url;
     private MonitorInterval      $interval;
     private MonitorState         $state;
@@ -24,6 +25,7 @@ class Monitor
 
     public function __construct(
         int                  $id,
+        int                  $userID,
         MonitorUrl           $url,
         MonitorInterval      $interval,
         MonitorState         $state,
@@ -33,6 +35,7 @@ class Monitor
     )
     {
         $this->id            = $id;
+        $this->userID        = $userID;
         $this->url           = $url;
         $this->interval      = $interval;
         $this->state         = $state;
@@ -45,6 +48,11 @@ class Monitor
     public function id(): int
     {
         return $this->id;
+    }
+
+    public function userID(): int
+    {
+        return $this->userID;
     }
 
     public function url(): MonitorUrl
@@ -168,10 +176,11 @@ class Monitor
     }
 
 
-    public static function create(int $id, string $url, int $interval, int $timeOut): self
+    public static function create(int $id, int $userID, string $url, int $interval, int $timeOut): self
     {
         return new self(
             $id,
+            $userID,
             new MonitorUrl($url),
             new MonitorInterval($interval),
             new MonitorState(MonitorState::PENDING),
@@ -185,6 +194,7 @@ class Monitor
     public function equals(Monitor $other): bool
     {
         return $this->id === $other->id
+            && $this->userID === $other->userID
             && $this->url->equals($other->url)
             && $this->interval->equals($other->interval)
             && $this->state->equals($other->state)
